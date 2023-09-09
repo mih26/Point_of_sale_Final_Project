@@ -1,0 +1,106 @@
+﻿@page "/Categories/List"
+@using EPOS.BlazorClient.Client.Shared.Components;
+@inject HttpClient http
+@inject IDialogService dialogService
+@if (categories is not null)
+{
+    <MudCard Style="width:100%">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h5">Categories</MudText>
+                <MudText Typo="Typo.body2">List of categories</MudText>
+            </CardHeaderContent>
+            <CardHeaderActions>
+                <MudFab Size="Size.Medium" Href="/Categories/Create" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Add" />
+
+            </CardHeaderActions>
+        </MudCardHeader>
+        <MudCardContent>
+
+            <MudTable Items="@categories" Hover="true" SortLabel="Sort By">
+                <HeaderContent>
+                    <MudTh><MudTableSortLabel SortBy="new Func<Category, object>(x=>x.CategoryName)">Category Name</MudTableSortLabel></MudTh>
+                    <MudTh DataLabel="Description">Category Name</MudTh>
+                    <MudTh DataLabel="Action">...</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Category name">@context.CategoryName</MudTd>
+                    <MudTd DataLabel="Description">@context.Description</MudTd>
+                    <MudTd DataLabel="Action">
+                        <MudIconButton Href="@GetEditLink(@context)" Icon="@Icons.Material.Filled.Edit" aria-label="Edit"></MudIconButton>
+                        <MudIconButton @onclick="@(()=>ConfirmDelete(@context))" Icon="@Icons.Material.Filled.Delete" aria-label="Delete"></MudIconButton>
+                    </MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager PageSizeOptions="new int[]{5, 10, 25,50, 100}" />
+                </PagerContent>
+            </MudTable>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+        </MudCardActions>
+    </MudCard>
+}
+else
+{
+    <svg class="loading-progress">
+        <circle r="40%" cx="50%" cy="50%" />
+        <circle r="40%" cx="50%" cy="50%" />
+    </svg>
+    <div class="loading-progress-text"></div>
+}
+@code {
+    private IEnumerable<Category>? categories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await http.GetFromJsonAsync<IEnumerable<Category>>("api/Categories");
+        if (data is not null)
+        {
+            categories = data;
+        }
+    }
+    private async Task ConfirmDelete(Category c)
+    {
+        string dialogText = "";
+        var canDelete = await CanDelete(c.CategoryId);
+        if (!canDelete)
+        {
+            dialogText = "This item has related child. Cascading effect might delete them";
+
+        }
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete this record? This action cannot be undone.");
+        parameters.Add("ExtraText", dialogText);
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() { CloseButton = true };
+
+        var dialog = await dialogService.ShowAsync<ConfirmDialog>("Confirm", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            var response = await http.DeleteAsync($"api/Categories/{c.CategoryId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var deleted = categories?.ToList()
+                    .FirstOrDefault(x => x.CategoryId == c.CategoryId);
+                categories = categories?
+                         .GroupBy(s => s)
+                         .SelectMany(g => g.Key.Equals(deleted) ? g.Skip(1) : g)
+                         .ToList();
+            }
+        }
+    }
+    private async Task<bool> CanDelete(int id)
+    {
+        var canDelete = await http.GetFromJsonAsync<bool>($"api/Categories/CanDelete/{id}");
+        return canDelete;
+
+    }
+    private string GetEditLink(Category category)
+    {
+        return $"/Categories/Edit/{category.CategoryId}";
+    }
+}

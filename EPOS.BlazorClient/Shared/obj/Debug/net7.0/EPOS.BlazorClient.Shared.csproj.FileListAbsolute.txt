@@ -1,0 +1,72 @@
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.deps.json
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.AssemblyReference.cache
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfoInputs.cache
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfo.cs
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.CoreCompileInputs.cache
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\obj\Debug\net7.0\refint\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+D:\R50\Project\Final\EPOS\EPOS.BalzorClient\Shared\obj\Debug\net7.0\ref\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.deps.json
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.AssemblyReference.cache
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfoInputs.cache
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfo.cs
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.CoreCompileInputs.cache
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\refint\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+D:\R50\Project\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\ref\EPOS.BlazorClient.Shared.dll
+E:\Final\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.deps.json
+E:\Final\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+E:\Final\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+E:\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.AssemblyReference.cache
+E:\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.GeneratedMSBuildEditorConfig.editorconfig
+E:\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfoInputs.cache
+E:\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfo.cs
+E:\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.CoreCompileInputs.cache
+E:\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+E:\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\refint\EPOS.BlazorClient.Shared.dll
+E:\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+E:\Final\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\ref\EPOS.BlazorClient.Shared.dll
+E:\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.deps.json
+E:\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+E:\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+E:\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.AssemblyReference.cache
+E:\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.GeneratedMSBuildEditorConfig.editorconfig
+E:\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfoInputs.cache
+E:\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfo.cs
+E:\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.CoreCompileInputs.cache
+E:\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+E:\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\refint\EPOS.BlazorClient.Shared.dll
+E:\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+E:\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\ref\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.deps.json
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.AssemblyReference.cache
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfoInputs.cache
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfo.cs
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.CoreCompileInputs.cache
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\refint\EPOS.BlazorClient.Shared.dll
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+D:\R50\Project\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\ref\EPOS.BlazorClient.Shared.dll
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.deps.json
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\bin\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.AssemblyReference.cache
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfoInputs.cache
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.AssemblyInfo.cs
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.csproj.CoreCompileInputs.cache
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.dll
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\refint\EPOS.BlazorClient.Shared.dll
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\EPOS.BlazorClient.Shared.pdb
+C:\Users\nuzat\Desktop\Akheri Last\Last\EPOS\EPOS.BlazorClient\Shared\obj\Debug\net7.0\ref\EPOS.BlazorClient.Shared.dll

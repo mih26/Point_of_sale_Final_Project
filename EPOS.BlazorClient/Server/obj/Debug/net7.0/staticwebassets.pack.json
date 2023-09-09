@@ -1,0 +1,97 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\02bxcuoi.png",
+      "PackagePath": "staticwebassets\\Pictures\\02bxcuoi.png"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\05ab5fpi.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\05ab5fpi.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\1.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\3udraar1.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\3udraar1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\bxk0f22s.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\bxk0f22s.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\eq13rmr2.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\eq13rmr2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\jga41250.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\jga41250.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\ksonaraa.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\ksonaraa.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\rouqoipw.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\rouqoipw.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\secsin1b.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\secsin1b.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\slabdiaz.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\slabdiaz.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\wtaw0oak.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\wtaw0oak.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\x3nnqliq.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\x3nnqliq.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\Pictures\\y1cc3rvd.jpg",
+      "PackagePath": "staticwebassets\\Pictures\\y1cc3rvd.jpg"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\barcodes\\c5qgef2o.png",
+      "PackagePath": "staticwebassets\\barcodes\\c5qgef2o.png"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\barcodes\\lhrtnawv.png",
+      "PackagePath": "staticwebassets\\barcodes\\lhrtnawv.png"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\barcodes\\lpba1pun.png",
+      "PackagePath": "staticwebassets\\barcodes\\lpba1pun.png"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\barcodes\\o1yu0azz.png",
+      "PackagePath": "staticwebassets\\barcodes\\o1yu0azz.png"
+    },
+    {
+      "Id": "C:\\Users\\nuzat\\Desktop\\Akheri Last\\Last\\EPOS\\EPOS.BlazorClient\\Server\\wwwroot\\barcodes\\xlgc55ff.png",
+      "PackagePath": "staticwebassets\\barcodes\\xlgc55ff.png"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.EPOS.BlazorClient.Server.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.EPOS.BlazorClient.Server.props",
+      "PackagePath": "build\\EPOS.BlazorClient.Server.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.EPOS.BlazorClient.Server.props",
+      "PackagePath": "buildMultiTargeting\\EPOS.BlazorClient.Server.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.EPOS.BlazorClient.Server.props",
+      "PackagePath": "buildTransitive\\EPOS.BlazorClient.Server.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

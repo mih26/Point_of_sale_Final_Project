@@ -1,0 +1,108 @@
+@page "/Racks/List"
+
+@inject HttpClient httpClient
+@inject IDialogService dialogService
+@inject ISnackbar snackBar
+<div class="mt-5">
+    <MudText Typo="Typo.h6">Racks</MudText>
+    <div class="my-3">
+        <MudToolBar>
+
+            <MudSpacer />
+
+            <MudFab Href="/Racks/Create" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Add" Size="Size.Large" />
+        </MudToolBar>
+    </div>
+    @if(Items is null){
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true"  />
+    }
+    else
+    {
+       
+        <MudTable Items="@Items" SortLabel="Sort By">
+        <HeaderContent>
+
+            <MudTh>
+                <MudTableSortLabel SortBy="new Func<Rack, object>(x=>x.RackName)">Rack Code</MudTableSortLabel>
+            </MudTh>
+            <MudTh>Rack Type</MudTh>
+            <MudTh>Layers</MudTh>
+            <MudTh>Top Open?</MudTh>
+            <MudTh>Layers</MudTh>
+            <MudTh>...</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+           
+            <MudTd DataLabel="Rack Code">@context.RackName</MudTd>
+            <MudTd DataLabel="Rack Type">@context.RakType</MudTd>
+            <MudTd DataLabel="Rack Type">@context.LayerCount</MudTd>
+            <MudTd DataLabel="Top Open?">@context.IsTopOpen</MudTd>
+            <MudTd DataLabel="View Layers?"><MudButton Href="@GetLayerLink(@context)" Variant="Variant.Text">Layers</MudButton></MudTd>
+                <MudTd DataLabel="Action">
+                    <MudIconButton Href="@GetEditLink(@context)" Icon="@Icons.Material.Filled.Edit" aria-label="Edit"></MudIconButton>
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" @onclick="@(()=>ConfirmDelete(@context))" aria-label="Delete"></MudIconButton>
+                   </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{10, 25, 50, 100}" />
+        </PagerContent>
+    </MudTable>
+    }
+</div>
+@code {
+    private IEnumerable<Rack>? Items { get; set; } = default!;
+    protected override async Task OnInitializedAsync()
+    {
+        Items = await httpClient.GetFromJsonAsync<List<Rack>>("/api/Racks");
+        Console.WriteLine(Items?.Count());
+    }
+    private string GetLayerLink(Rack r)
+    {
+        return $"/Racks/Layes/{r.RackId}";
+    }
+    private string GetEditLink(Rack r)
+    {
+        return $"/Racks/Layes/{r.RackId}";
+    }
+    private async Task ConfirmDelete(Rack r)
+    {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete this record? This action cannot be undone.");
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() { CloseButton = true };
+
+        var dialog = await dialogService.ShowAsync<ConfirmDialog>("Confirm", parameters,options );
+        var result = await dialog.Result;
+        if(!result.Canceled)
+        {
+            Console.WriteLine("To del");
+            var response = await httpClient.DeleteAsync($"/api/Racks/{r.RackId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var deleted = Items?.ToList()
+            .FirstOrDefault(x => x.RackId == r.RackId);
+                if (deleted is not null)
+                {
+                    snackBar.Clear();
+                    snackBar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+                    snackBar.Add("Data deleted successfully", Severity.Success);
+                    //Items?.ToList()
+                    //.Remove(deleted);
+                    Items = Items?
+                    .GroupBy(s => s)
+                    .SelectMany(g => g.Key.Equals(deleted) ? g.Skip(1) : g)
+                    .ToList();
+                }
+            }
+            else
+            {
+                snackBar.Clear();
+                snackBar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+                snackBar.Add("Failed to delete record.", Severity.Error);
+            }
+        }
+    }
+
+}

@@ -1,0 +1,212 @@
+﻿@model OrderInputModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row" style="margin-top:70px;">
+    
+        <div class="card">
+            <div class="card-image">
+              @*  <img src="images/sample-1.jpg">
+                <span class="card-title">Card Title</span>*@
+                <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">refresh</i></a>
+            </div>
+            <div class="card-content">
+                <span class="card-title">POS Sells</span>
+                
+                <div class="w-row flex">
+                    <div class="input-field col-50">
+
+                        <input id="code" type="text" class="validate">
+
+                        <label for="first_name">Product Code</label>
+                        <button class="btn waves-effect waves-light" type="submit" id="add">
+                            Add
+                        </button>
+                    </div>
+                    <div class="input-field col-50">
+
+                        <input id="search" type="text" class="validate">
+
+                        <label for="first_name">Search</label>
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Search
+                        </button>
+                    </div>
+                   
+                </div>
+                <div class="w-row">
+                    <form style="display:block;width:100%" id="frm">
+                        <h3>Order</h3>
+                    <div class="w-row flex">
+                        <div class="input-field col-50">
+
+                            <input asp-for="CustomerName"  type="text" class="validate">
+
+                            <label asp-for="CustomerName">Customer</label>
+                            
+                            
+                        </div>
+                        <div class="input-field col-50">
+
+                            <input asp-for="Phone" type="text" class="validate">
+
+                            <label asp-for="Phone">Phone</label>
+                           
+                        </div>
+                    </div>
+                    <div class="w-row flex">
+                        <div class="input-field col-50">
+                            
+                            <select asp-for="PaymentVia" style="flex: 1 1 auto;width:100%" >
+                                <option value="" >Choose your option</option>
+                                <option value="Card">Card</option>
+                                <option value="Cash">Cash</option>
+                                <option value="BKask">Bkash</option>
+                                <option value="NAGAD">Nagad</option>
+                            </select>
+
+                            <label>Payment Via</label>
+
+                        </div>
+                        <div class="input-field col-50">
+
+                            <button type="button" id="submit" class="btn waves-light">Submit</button>
+
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <div class="row">
+                    <div class="col m12 s12">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th >Amount</th>
+                                    <th>...</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbd">
+
+                            </tbody>
+                            <tbody>
+                            <tr>
+                                <td colspan="4" class="right-align">Total</td>
+                                <td class="right-align"><span id="total"></span></td>
+                            </tr>
+                                <tr>
+                                    <td colspan="4" class="right-align">Vat</td>
+                                    <td  class="right-align"><span id="vat"></span></td>
+                                </tr>
+                           
+                           
+                            
+                            <tr>
+                                <td colspan="4" class="right-align">Net amount</td>
+                                <td class="right-align"><span id="net"></span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>                
+                 </div>
+
+
+            </div>
+        </div>
+    </div>
+
+@section scripts{
+   
+    <script src="~/libs/validation/jquery.validate.js"></script>
+    <script src="~/libs/validation/jquery.validate.unobtrusive.js"></script>
+  
+    <script>
+        $("#code").focus();
+        var orderItems = [];
+        var elems = document.querySelectorAll('select');
+        console.log(elems)
+        var instances = M.FormSelect.init(elems, {});
+        $("#add").click(()=>{
+            var code = $("#code").val();
+            $.ajax({
+                type:"POST",
+                url: "/Home/FindProduct?code"+code,
+                dataType:"json",
+                data:{code:code},
+                success:r=>{
+                    console.log(r);
+                    orderItems.push(r);
+                    console.log(orderItems);
+                    loadToTable(r, orderItems.length - 1);
+
+                }
+            });
+           
+        });
+        $("#submit").click(() => {
+            console.log('submit');
+            var valid = $("#frm").valid();
+            if(!valid) {
+                M.toast({html:'<span>Customer name, phone or payement method missing! </span><button class="btn-flat toast-action">Undo</button > '});
+                return;
+
+            }
+            var orderData = { CustomerName:$("#CustomerName").val(), Phone:$("#Phone").val(), PaymentVia:$("#PaymentVia").val() };
+            orderData.OrderItems =[];
+            orderItems.forEach((v, i)=>{
+                orderData.OrderItems.push( { SelfCode: v.selfCode, Quantity: v.quantity })
+            });
+            $.ajax({
+                type:"post",
+                url: "/Home/SaveOrder",
+                data:orderData,
+                dataType: "json",
+                success: r=>{
+                    $("#frm").trigger('reset');
+                    orderItems=[];
+                    $("#tbd").empty();
+                    M.toast({ html: '<span>Order saved! </span><button class="btn-flat toast-action">Undo</button > ' });
+                },
+                error:  (xhr, status, error)=> {
+                    // there was an error
+                    console.log(xhr.responseJSON.message);
+                    M.toast({ html: '<span>Failed to save! </span><button class="btn-flat toast-action">Undo</button > ' });
+                }
+            })
+            console.log(orderData);
+        });
+        function loadToTable(r, index){
+            console.log(index)
+            $("#tbd").append(`<tr>
+                                <td>${r.productName}</td>
+                               <td>${r.selfPrice.toFixed(2)}</td>
+                               <td>1</td>
+                                      <td class="amount">${r.selfPrice * 1}</td>
+                                        <td><button data-index='${index}' type='button' class='btn del'><i class="material-icons">delete</i></button></td>
+                            </tr>`);
+            $("#code").val('');
+            $("#code").focus();
+            var total = 0;
+            $("tbody td.amount").each((i, el) => {
+                total += Number($(el).text());
+            });
+            $("#total").text(total.toFixed(2));
+            $("#vat").text((total * .015).toFixed(2));
+            $("#net").text((total * (1 - .015)).toFixed(2));
+        }
+        $(document).on('click', 'button.del',function (el){
+            let n=$(this).data('index');
+            orderItems.splice(n, 1);
+            $("#tbd").empty();
+            orderItems.forEach((v, i)=>{
+                loadToTable(v, i);
+            });
+            console.log(orderItems);
+        })
+    </script>
+}
+

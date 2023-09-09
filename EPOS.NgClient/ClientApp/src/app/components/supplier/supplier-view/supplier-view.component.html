@@ -1,0 +1,40 @@
+<div class="view-container">
+   
+    <mat-card class="table-card mat-elevation-z9">
+      <mat-card-header>
+        <mat-card-title>Supplier</mat-card-title>
+        <mat-card-subtitle>Product suppliers</mat-card-subtitle>
+        <img src="../../../../assets/supply-chain-optimization-02-svgrepo-com.svg" mat-card-avatar class="avatar" />
+        <span class="filler"></span>
+        <a mat-mini-fab [routerLink]="['/supplier-create']" [title]="'Create new inventory'"><mat-icon>add</mat-icon></a>
+      </mat-card-header>
+      <mat-card-content >
+  
+        <mat-table [dataSource]="dataSource" matSort>
+          <ng-container matColumnDef="companyName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Company Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.companyName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="contactName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Contact Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.contactName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="contactNo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Contact No</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.contactNo}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Edit/Delete</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-icon-button [routerLink]="['/supplier-edit', element.brandId]"><mat-icon>edit</mat-icon></button>
+              <button mat-icon-button color="warn" (click)="confirmDelete(element)"><mat-icon>delete</mat-icon></button>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="columnList"></mat-header-row>
+          <mat-row *matRowDef="let row;columns:columnList"></mat-row>
+        </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator> 
+        
+      </mat-card-content>
+    </mat-card>
+  </div>

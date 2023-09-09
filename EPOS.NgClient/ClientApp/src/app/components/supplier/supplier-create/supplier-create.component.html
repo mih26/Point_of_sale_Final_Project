@@ -1,0 +1,45 @@
+<div class="view-container">
+  <mat-card class="medium-form-card-container mat-elevation-z8">
+    <mat-card-header>
+
+      <mat-card-title>Create Supplier</mat-card-title>
+      <mat-card-subtitle>Create supplier entry</mat-card-subtitle>
+      <img src="../../../../assets/crane-svgrepo-com.svg" mat-card-avatar class="avatar" />
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="medium-form-container">
+
+      <form [formGroup]="supplierForm" (ngSubmit)="save()" >
+
+        <mat-form-field class="f-w" >
+          <mat-label>Category Name</mat-label>
+          <input matInput formControlName="companyName" />
+          <mat-error *ngIf="f['companyName'].touched && f['companyName'].invalid">Company name is <strong>required</strong></mat-error>
+        </mat-form-field>
+        <mat-form-field class="f-w" >
+            <mat-label>Contact Name</mat-label>
+            <input matInput formControlName="contactName" />
+            <mat-error *ngIf="f['contactName'].touched && f['companyName'].invalid">Contact name is <strong>required</strong></mat-error>
+          </mat-form-field>
+          <mat-form-field class="f-w" >
+            <mat-label>Contact no</mat-label>
+            <input matInput formControlName="contactNo" />
+            <mat-error *ngIf="f['contactNo'].touched && f['contactNo'].invalid">Contact no is <strong>required</strong></mat-error>
+          </mat-form-field>
+        <div class="f-w right my-1">
+          <button  type="reset" mat-raised-button color="accent">Reset</button>
+          &nbsp;
+          <button  type="submit" mat-raised-button color="primary" [disabled]="supplierForm.invalid">Submit</button>
+        </div>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions class="medium-form-container">
+      <a mat-flat-button [routerLink]="['/suppliers']" class="mt-1"><mat-icon>west</mat-icon> back to list</a>
+    </mat-card-actions>
+
+  </mat-card>
+</div>

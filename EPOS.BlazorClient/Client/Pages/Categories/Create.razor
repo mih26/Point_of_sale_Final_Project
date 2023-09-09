@@ -1,0 +1,77 @@
+﻿@page "/Categories/Create"
+@inject HttpClient http
+@inject ISnackbar snackbar
+<div class="form-container">
+    <MudCard>
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h5">Category</MudText>
+                <MudText Typo="Typo.body2">Create new category</MudText>
+            </CardHeaderContent>
+            <CardHeaderActions>
+                <MudIconButton @onclick="Reset" Icon="@Icons.Material.Filled.Refresh" Color="Color.Primary" />
+            </CardHeaderActions>
+        </MudCardHeader>
+        <MudCardContent>
+            <div>
+                @if (isInsertError)
+                {
+                    <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Elevation="3" Class="my-4">
+                        Elevated Alert, or is it?
+                    </MudAlert>
+                }
+                <EditForm Model="@Category" OnValidSubmit="OnSubmit" >
+                    <DataAnnotationsValidator />
+                    <MudTextField Label="Category name" 
+                                  @bind-Value="Category.CategoryName" For="@(() => Category.CategoryName)" />
+                    <MudTextField Label="Desciption" Lines="3"
+                                  @bind-Value="Category.Description" For="@(() => Category.Description)" />
+                    
+                   
+                   <div style="margin-top:15px">
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
+                   </div>
+                </EditForm>
+            </div>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Href="/Categories/List" Variant="Variant.Text" Color="Color.Primary">Back to category list</MudButton>
+        </MudCardActions>
+    </MudCard>
+</div>
+
+
+@code {
+    private CategoryInputModel Category { get; set; } = new();
+    private bool isInsertError { get; set; } = false;
+    protected override Task OnInitializedAsync()
+    {
+        //Category.SubCategories.Add(new SubCategoryInputModel());
+        return base.OnInitializedAsync();
+    }
+    private void AddOne()
+    {
+       // Category.SubCategories.Add(new SubCategoryInputModel());
+    }
+    private void Reset()
+    {
+        Category = new();
+        //Category.SubCategories.Add(new SubCategoryInputModel());
+    }
+    private async Task OnSubmit()
+    {
+        isInsertError = false;
+        var response = await http.PostAsJsonAsync("api/Categories/Sub", Category);
+        if (response.IsSuccessStatusCode)
+        {
+            Reset();
+            snackbar.Clear();
+            snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+            snackbar.Add("Data saved successfully", Severity.Success);
+        }
+        else
+        {
+            isInsertError = true;
+        }
+    }
+}

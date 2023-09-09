@@ -1,0 +1,53 @@
+<div class="view-container">
+   
+    <mat-card class="table-card mat-elevation-z9">
+      <mat-card-header>
+        <mat-card-title>Inventories</mat-card-title>
+        <mat-card-subtitle>Product inventories</mat-card-subtitle>
+        <img src="../../../../assets/weigh-inventory-inventory-sell-in-bulk-svgrepo-com.svg" mat-card-avatar class="avatar" />
+        <span class="filler"></span>
+        <a mat-mini-fab [routerLink]="['/selfed-product-create']" [title]="'Create new selfing'"><mat-icon>add</mat-icon></a>
+      </mat-card-header>
+      <mat-card-content >
+  
+        <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="supplierName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Supplier Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.supplierName}}</mat-cell>
+              </ng-container>
+          <ng-container matColumnDef="productName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.productName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="selfQuantity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Self Quantity/remaining</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.selfQuantity}}/{{element.selfQuantity-element.sold}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="sold">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Sold</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.sold}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="rackName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Rack</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.rackName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="inventoryCode">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Inventory Code</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.inventoryCode}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="barcodeImage">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>barcode</mat-header-cell>
+            <mat-cell *matCellDef="let element"><img style="height:50px" src="{{barCodePath}}/{{element.barcodeImage}}"></mat-cell>
+          </ng-container>
+          
+          
+          <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+          <mat-row *matRowDef="let row;columns:columns"></mat-row>
+        </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator> 
+        
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+

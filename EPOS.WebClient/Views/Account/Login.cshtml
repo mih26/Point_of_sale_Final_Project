@@ -1,0 +1,60 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+<form method="post" asp-controller="Account" asp-action="Login">
+    <div class="row">
+        <div class="input-field col m6 s12">
+
+            <input asp-for="Username" type="text" class="validate">
+
+            <label asp-for="Username"></label>
+            <span asp-validation-for="Username" class="err"></span>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col m6 s12">
+
+            <input asp-for="Password" type="password" class="validate">
+
+            <label asp-for="Password"></label>
+            <span asp-validation-for="Password" class="err"></span>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col m6 s12">
+
+            <select asp-for="CounterId" style="flex: 1 1 auto;width:100%">
+                <option value="0" selected>Select</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">3</option>
+            </select>
+
+            <label asp-for="CounterId"></label>
+            <span  asp-validation-for="CounterId" class="err"></span>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col m6 s12">
+
+            <button type="submit" class="btn">Login</button>
+
+        </div>
+    </div>
+</form>
+
+@section scripts{
+   
+    <script src="~/libs/validation/jquery.validate.js"></script>
+    <script src="~/libs/validation/jquery.validate.unobtrusive.js"></script>
+    <script>
+        var elems = document.querySelectorAll('select');
+       
+        var instances = M.FormSelect.init(elems, {});
+    </script>
+}

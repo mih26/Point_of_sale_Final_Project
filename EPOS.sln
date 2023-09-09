@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPOS.BlazorClient.Server", "EPOS.BlazorClient\Server\EPOS.BlazorClient.Server.csproj", "{15B68C77-414F-4B81-AF8F-AF0F5BE186F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPOS.BlazorClient.Client", "EPOS.BlazorClient\Client\EPOS.BlazorClient.Client.csproj", "{106C4B52-81E3-4E72-866C-66EC7E67ED23}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPOS.BlazorClient.Shared", "EPOS.BlazorClient\Shared\EPOS.BlazorClient.Shared.csproj", "{A52875F8-DBE0-42B3-A6B1-7DEB8DFE0CF5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EPOS.NgClient", "EPOS.NgClient\EPOS.NgClient.csproj", "{BCC7C19F-F533-4914-9296-E47544019DB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPOS.WebClient", "EPOS.WebClient\EPOS.WebClient.csproj", "{1E6E4C12-B8B3-4662-94CA-4635108EACD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15B68C77-414F-4B81-AF8F-AF0F5BE186F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B68C77-414F-4B81-AF8F-AF0F5BE186F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B68C77-414F-4B81-AF8F-AF0F5BE186F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B68C77-414F-4B81-AF8F-AF0F5BE186F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{106C4B52-81E3-4E72-866C-66EC7E67ED23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{106C4B52-81E3-4E72-866C-66EC7E67ED23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{106C4B52-81E3-4E72-866C-66EC7E67ED23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{106C4B52-81E3-4E72-866C-66EC7E67ED23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A52875F8-DBE0-42B3-A6B1-7DEB8DFE0CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A52875F8-DBE0-42B3-A6B1-7DEB8DFE0CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A52875F8-DBE0-42B3-A6B1-7DEB8DFE0CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A52875F8-DBE0-42B3-A6B1-7DEB8DFE0CF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCC7C19F-F533-4914-9296-E47544019DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCC7C19F-F533-4914-9296-E47544019DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCC7C19F-F533-4914-9296-E47544019DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCC7C19F-F533-4914-9296-E47544019DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E6E4C12-B8B3-4662-94CA-4635108EACD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E6E4C12-B8B3-4662-94CA-4635108EACD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E6E4C12-B8B3-4662-94CA-4635108EACD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E6E4C12-B8B3-4662-94CA-4635108EACD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0E520BF8-0665-458E-9E28-51F92A79C9EF}
+	EndGlobalSection
+EndGlobal

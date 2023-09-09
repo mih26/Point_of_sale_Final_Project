@@ -1,0 +1,100 @@
+<div class="view-container">
+    <mat-card class="medium-form-card-container mat-elevation-z8">
+      <mat-card-header>
+        <mat-card-title>Create Supplier</mat-card-title>
+        <mat-card-subtitle>Create supplier entry</mat-card-subtitle>
+        <img
+          src="../../../../assets/crane-svgrepo-com.svg"
+          mat-card-avatar
+          class="avatar"
+        />
+      </mat-card-header>
+  
+      <mat-divider></mat-divider>
+  
+      <mat-card-content class="medium-form-container">
+        <form [formGroup]="inventoryForm" (ngSubmit)="save()">
+          <mat-form-field class="f-w">
+            <mat-label>Date</mat-label>
+            <input matInput formControlName="inDate" [matDatepicker]="datepicker" />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="datepicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #datepicker>
+              
+            </mat-datepicker>
+            <mat-error *ngIf="f['inDate'].touched && f['inDate'].invalid"
+              >Date is <strong>required</strong></mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="f-w">
+            <mat-label>Supplier</mat-label>
+            <mat-select formControlName="supplierId">
+              <mat-option
+                *ngFor="let item of suppliers"
+                [value]="item.supplierId"
+                >{{ item.companyName }}</mat-option
+              >
+            </mat-select>
+            <mat-error *ngIf="f['supplierId'].touched && f['supplierId'].invalid"
+              >Supplier is <strong>required</strong></mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="f-w">
+            <mat-label>Product</mat-label>
+            <mat-select formControlName="productId">
+              <mat-option
+                *ngFor="let item of products"
+                [value]="item.productId"
+                >{{ item.productName }}</mat-option
+              >
+            </mat-select>
+            <mat-error *ngIf="f['productId'].touched && f['productId'].invalid"
+              >Product is <strong>required</strong></mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="f-w">
+            <mat-label>Quantity</mat-label>
+            <input matInput formControlName="quantity" />
+            <mat-error *ngIf="f['quantity'].touched && f['quantity'].invalid"
+              >Quantity is <strong>required</strong></mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="f-w">
+              <mat-label>Unit Price</mat-label>
+              <input matInput formControlName="unitPrice" />
+              <mat-error *ngIf="f['unitPrice'].touched && f['unitPrice'].invalid"
+                >Unit price is <strong>required</strong></mat-error
+              >
+            </mat-form-field>
+            <mat-form-field class="f-w">
+              <mat-label>Self Price</mat-label>
+              <input matInput formControlName="selfPrice" />
+              <mat-error *ngIf="f['selfPrice'].touched && f['selfPrice'].invalid"
+                >Self price is <strong>required</strong></mat-error
+              >
+            </mat-form-field>
+          <div class="f-w right my-1">
+            <button type="reset" mat-raised-button color="accent">Reset</button>
+            &nbsp;
+            <button
+              type="submit"
+              mat-raised-button
+              color="primary"
+              [disabled]="inventoryForm.invalid"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </mat-card-content>
+  
+      <mat-card-actions class="medium-form-container">
+        <a mat-flat-button [routerLink]="['/inventories']" class="mt-1"
+          ><mat-icon>west</mat-icon> back to list</a
+        >
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  

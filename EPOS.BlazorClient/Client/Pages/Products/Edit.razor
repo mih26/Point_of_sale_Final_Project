@@ -1,0 +1,209 @@
+﻿@page "/Products/Edit/{id:int}"
+@using System.Net.Http.Headers;
+@using System.Text.Json;
+@inject HttpClient http
+@inject IJSRuntime JSRuntime
+@inject ISnackbar snackbar
+<div class="form-container">
+    <MudCard>
+        <MudCardHeader>
+
+
+
+
+
+
+
+            <CardHeaderContent>
+                <MudText Typo="Typo.h5">Product</MudText>
+                <MudText Typo="Typo.body2">Edit product</MudText>
+
+            </CardHeaderContent>
+            <CardHeaderActions>
+                @if (model is not null)
+                {
+
+                    @*<MudAvatar Color="Color.Secondary" Size="Size.Large">*@
+                    <img src="@GetIamgePath(model)" class="img-thumbnail rounded-circle" style="width:80px" />
+                    @*</MudAvatar>*@
+                }
+
+            </CardHeaderActions>
+        </MudCardHeader>
+
+        <MudCardContent>
+            <div>
+                @if (isInsertError)
+                {
+                    <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Elevation="3" Class="my-4">
+                        Elevated Alert, or is it?
+                    </MudAlert>
+                }
+                @if (model is not null)
+                {
+                    <EditForm Model="@model" OnValidSubmit="SaveProduct">
+                        <DataAnnotationsValidator />
+                        <MudTextField Label="Product name"
+                                  @bind-Value="model.ProductName" For="@(() => model.ProductName)" />
+                        <MudSelect @bind-Value="model.CategoryId" T="int" Label="Category" AnchorOrigin="Origin.BottomCenter" For="@(() => model.CategoryId)">
+                            <MudSelectItem Value="0">(none)</MudSelectItem>
+                            @if (categories is not null)
+                            {
+                                foreach (var c in categories)
+                                {
+                                    <MudSelectItem Value="@c.CategoryId">@c.CategoryName</MudSelectItem>
+                                }
+                            }
+
+                        </MudSelect>
+                        <MudSelect SelectedValuesChanged="@(async ()=>await OnMeasurementChanged())" T="int" Label="Measured by" @bind-Value="model.ProductMeasurementId" AnchorOrigin="Origin.BottomCenter" For="@(() => model.ProductMeasurementId)">
+                            <MudSelectItem Value="0">(none)</MudSelectItem>
+                            @if (measurements is not null)
+                            {
+                                foreach (var m in measurements)
+                                {
+                                    <MudSelectItem Value="@m.ProductMeasurementId">@m.BaseTypeName</MudSelectItem>
+                                }
+                            }
+
+                        </MudSelect>
+                        <MudSelect T="int" Label="Sell unit" @bind-Value="model.SellUnitId" AnchorOrigin="Origin.BottomCenter" For="@(() => model.ProductMeasurementId)">
+                            <MudSelectItem Value="0">(none)</MudSelectItem>
+                            @if (sellUnits is not null)
+                            {
+                                foreach (var su in sellUnits)
+                                {
+                                    <MudSelectItem Value="@su.SellUnitId">@su.SellUnitName</MudSelectItem>
+                                }
+                            }
+
+                        </MudSelect>
+                        <MudTextField @bind-Value="model.PerItemUnitValue" Label="Unit Qty." For="@(() => model.PerItemUnitValue)" Variant="Variant.Text" InputType="InputType.Number"></MudTextField>
+                        <MudTextField @bind-Value="model.UnitPrice" Label="Unit Price" For="@(() => model.UnitPrice)" Variant="Variant.Text" InputType="InputType.Number"></MudTextField>
+                        <MudTextField @bind-Value="model.Description" Label="Description" For="@(() => model.Description)" Variant="Variant.Text"></MudTextField>
+                        <MudTextField @bind-Value="model.Size" Label="Size" For="@(() => model.Size)" Variant="Variant.Text"></MudTextField>
+                        <MudTextField @bind-Value="model.Color" Label="Color" For="@(() => model.Color)" Variant="Variant.Text"></MudTextField>
+                        <MudTextField @bind-Value="model.Weight" Label="Weight" For="@(() => model.Weight)" Variant="Variant.Text"></MudTextField>
+                        <MudTextField @bind-Value="model.Quantity" Label="Quantity" For="@(() => model.Quantity)" Variant="Variant.Text"></MudTextField>
+
+                        <MudTextField ReadOnly="true" @bind-Value="model.Picture" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.AttachFile" OnAdornmentClick="ButtonClick" AdornmentAriaLabel="Add Picture"></MudTextField>
+                        <InputFile type="file" style="display:none" id="fileElem" OnChange="@OnInputFileChange" />
+                        <MudCheckBox @bind-Checked="model.IsOffering">Offer Product?</MudCheckBox>
+                        <MudSelect Disabled="@(!model.IsOffering)" T="int" @bind-Value="model.OfferType" Label="Offer type" AnchorOrigin="Origin.BottomCenter">
+
+                            @foreach (OfferType item in Enum.GetValues(typeof(OfferType)))
+                            {
+                                <MudSelectItem Value="@((int)item)">@item</MudSelectItem>
+                            }
+                        </MudSelect>
+                        <MudTextField Disabled="@(!model.IsOffering)" @bind-Value="model.OfferDescription" Label="Offer description" For="@(() => model.OfferDescription)" Variant="Variant.Text"></MudTextField>
+                        <div class="mt-4">
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
+                        </div>
+                    </EditForm>
+                }
+                else
+                {
+                    <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+                }
+            </div>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Href="/Products/List" Variant="Variant.Text" Color="Color.Primary">Back to list</MudButton>
+        </MudCardActions>
+    </MudCard>
+    <div> @JsonSerializer.Serialize(model)</div>
+</div>
+@code {
+    [Parameter]
+    public int id { get; set; }
+    private ProductEditModel model { get; set; } = null!;
+    private IBrowserFile? pictureFile;
+    private bool isInsertError { get; set; } = false;
+
+    //---------------------------------
+    //--for dropdowns
+    //---------------------------------
+    private List<Category>? categories;
+    private List<ProductMeasurement>? measurements;
+    private List<SellUnit>? sellUnits;
+    private string pictureFileName { get; set; } = "";
+    protected override async Task OnInitializedAsync()
+    {
+        this.categories = await this.http.GetFromJsonAsync<List<Category>>("/api/Categories");
+        this.measurements = await this.http.GetFromJsonAsync<List<ProductMeasurement>>("/api/ProductMeasurements");
+        var data = await this.http.GetFromJsonAsync<ProductEditModel>($"/api/Products/VM/{id}");
+        if (data is not null) this.model = data;
+        Console.WriteLine(data?.ProductId);
+        this.sellUnits = await this.http.GetFromJsonAsync<List<SellUnit>>("/api/SellUnits/For/" + this.model.ProductMeasurementId);
+    }
+    private async Task OnMeasurementChanged()
+    {
+
+        if (this.model.ProductMeasurementId == 0)
+        {
+            sellUnits = null;
+            return;
+        }
+        this.sellUnits = await this.http.GetFromJsonAsync<List<SellUnit>>("/api/SellUnits/For/" + this.model.ProductMeasurementId);
+    }
+    private void OnInputFileChange(InputFileChangeEventArgs e)
+    {
+        pictureFile = e.File;
+        model.Picture = e.File.Name;
+
+        //this.StateHasChanged();
+    }
+    private async Task ButtonClick()
+    {
+
+        await JSRuntime.InvokeVoidAsync("elementClick", "fileElem");
+    }
+    private async Task SaveProduct()
+    {
+        if (model is not null)
+        {
+            var saveImage = await UploadItAsysnc();
+            model.Picture = saveImage.StoredFileName;
+            var response = await http.PutAsJsonAsync($"/api/Products/{id}", model);
+            if (response.IsSuccessStatusCode)
+            {
+
+                snackbar.Clear();
+                snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+                snackbar.Add("Data saved successfully", Severity.Success);
+            }
+            else
+            {
+                isInsertError = true;
+            }
+        }
+    }
+    private async Task<ImageUploadResponse> UploadItAsysnc()
+    {
+        using (var ms = new MemoryStream())
+        {
+
+            if (pictureFile is not null)
+            {
+                var content = new MultipartFormDataContent();
+                var fileContent = new StreamContent(pictureFile.OpenReadStream(long.MaxValue));
+
+                fileContent.Headers.ContentType = new MediaTypeHeaderValue(pictureFile.ContentType);
+                content.Add(content: fileContent, name: "\"file\"", fileName: pictureFile.Name);
+                var response = await http.PostAsync("/api/Products/Upload", content);
+                var r = await response.Content.ReadFromJsonAsync<ImageUploadResponse>();
+                return r == null ? new ImageUploadResponse() : r;
+            }
+            else
+            {
+                return new ImageUploadResponse();
+            }
+
+        }
+    }
+    private string GetIamgePath(ProductEditModel p)
+    {
+        return "/Pictures/" + p.Picture;
+    }
+}

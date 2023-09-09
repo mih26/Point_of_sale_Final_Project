@@ -1,0 +1,85 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = EPOS.BlazorClient.Client
+build_property.RootNamespace = EPOS.BlazorClient.Client
+build_property.ProjectDir = E:\2. Module_Project\Retail-POS-Management-System-main\EPOS.BlazorClient\Client\
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = E:\2. Module_Project\Retail-POS-Management-System-main\EPOS.BlazorClient\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Categories/CategoryList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmllc1xDYXRlZ29yeUxpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Products/ProductConfigSettings.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHNcUHJvZHVjdENvbmZpZ1NldHRpbmdzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Products/ProductList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHNcUHJvZHVjdExpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Racks/RackList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmFja3NcUmFja0xpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Shared/Components/ConfirmDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcQ29uZmlybURpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Shared/Components/ProductMeasurementCreateDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcUHJvZHVjdE1lYXN1cmVtZW50Q3JlYXRlRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Categories/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmllc1xDcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-bu0v2kc4fv
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Categories/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2F0ZWdvcmllc1xFZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-zb3lrw8mxb
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Products/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHNcQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-j7ntcsk9l6
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Products/Edit.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHNcRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-4y6zd8ekdd
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Pages/Racks/Create.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmFja3NcQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-8g992gqpn2
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Shared/Components/BaseTypeEditDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENvbXBvbmVudHNcQmFzZVR5cGVFZGl0RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-lo4nccayvw
+
+[E:/2. Module_Project/Retail-POS-Management-System-main/EPOS.BlazorClient/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-osecbuajib

@@ -1,0 +1,108 @@
+﻿@page "/Categories/Edit/{id:int}"
+@inject HttpClient http
+@inject ISnackbar snackbar
+<div class="edit-form-container">
+    <MudCard>
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h5">Category</MudText>
+                <MudText Typo="Typo.body2">Edit category</MudText>
+            </CardHeaderContent>
+            <CardHeaderActions>
+                <MudIconButton Icon="@Icons.Material.Filled.Refresh" Color="Color.Primary" />
+            </CardHeaderActions>
+        </MudCardHeader>
+        <MudCardContent>
+            <div>
+                @if (NotFound)
+                {
+                    <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Elevation="3" Class="my-4">
+                        Resource not found
+                    </MudAlert>
+                }
+                @if (UpdateError)
+                {
+                    <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Elevation="3" Class="my-4">
+                        Failed update item
+                    </MudAlert>
+                }
+            </div>
+            @if (Category is null)
+            {
+                <svg class="loading-progress">
+                    <circle r="40%" cx="50%" cy="50%" />
+                    <circle r="40%" cx="50%" cy="50%" />
+                </svg>
+                <div class="loading-progress-text"></div>
+            }
+            else
+            {
+                <EditForm Model="@Category" OnValidSubmit="OnSubmit">
+                    <DataAnnotationsValidator />
+                    <MudTextField Label="Category name"
+                              @bind-Value="Category.CategoryName" For="@(() => Category.CategoryName)" />
+                    <MudTextField Label="Desciption" Lines="3"
+                              @bind-Value="Category.Description" For="@(() => Category.Description)" />
+                    <MudToolBar>
+
+                        <MudSpacer />
+
+                        <MudIconButton @onclick="AddOne" Size="Size.Small" Color="Color.Primary" ButtonType="ButtonType.Button" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Add"></MudIconButton>
+                    </MudToolBar>
+                    
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
+                </EditForm>
+            }
+
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Href="/Categories/List" Variant="Variant.Text" Color="Color.Primary">Back to category list</MudButton>
+        </MudCardActions>
+    </MudCard>
+</div>
+@code {
+    [Parameter] public int id { get; set; }
+    private CategoryInputModel Category { get; set; } = default!;
+    private bool NotFound { get; set; } = false;
+    private bool UpdateError { get; set; } = false;
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await http.GetFromJsonAsync<CategoryInputModel>($"api/Categories/Sub/{id}");
+        if (data is not null)
+        {
+            Category = data;
+        }
+        else
+        {
+            NotFound = true;
+        }
+
+    }
+    private async Task OnSubmit()
+    {
+
+        var response = await http.PutAsJsonAsync($"api/Categories/Edit/{id}", Category);
+        if (response.IsSuccessStatusCode)
+        {
+            UpdateError = false;
+            snackbar.Clear();
+            snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+            snackbar.Add("Data updated successfully", Severity.Success);
+        }
+        else
+        {
+            UpdateError = true;
+        }
+    }
+    private void Remove(int index)
+    {
+        //var x = Category.SubCategories.ToList();
+        //x.RemoveAt(index);
+        //Category.SubCategories = x;
+    }
+    private void AddOne()
+    {
+        //Category.SubCategories.Add(new SubCategoryInputModel());
+    }
+
+}

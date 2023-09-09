@@ -1,0 +1,165 @@
+﻿@page "/Racks/Create"
+@using System.Text.Json;
+@inject HttpClient http
+@inject ISnackbar snackBar
+<div class="card-div pt-2">
+    @if (isError)
+    {
+        <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Class="my-2">
+            @errorMessage
+        </MudAlert>
+    }
+
+    <MudCard Class="mt-4">
+        <MudCardHeader Class="mb-0">
+            <CardHeaderContent>
+                <MudText Typo="Typo.h6">Create new rack</MudText>
+                <MudText Typo="Typo.subtitle1">Fill the form</MudText>
+            </CardHeaderContent>
+
+        </MudCardHeader>
+        <MudCardContent Class="mt-0">
+
+
+            <EditForm Model="@model"  OnValidSubmit="DoCreate">
+                <DataAnnotationsValidator />
+                <MudTextField Label="RackName" @bind-Value="model.RackName" For="@(() => model.RackName)" />
+                <MudSelect Label="Rack type" Variant="Variant.Text" @bind-Value="model.RakType">
+                    @foreach (var t in typeNames)
+                    {
+                        <MudSelectItem Value="t" />
+
+                    }
+                </MudSelect>
+                <MudTextField Label="Layer Count" @bind-Value="model.LayerCount" For="@(() => model.LayerCount)" />
+                <MudCheckBox @onchange="Generate" @bind-Checked="model.IsTopOpen" Label="Top Open" Class="ms-0 ps-0"></MudCheckBox>
+                
+           
+            <div>
+                <MudToolBar>
+
+                    <MudSpacer />
+
+                        <MudIconButton @onclick="Generate" Size="Size.Small" Color="Color.Primary" ButtonType="ButtonType.Button" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Layers"></MudIconButton>
+                </MudToolBar>
+            </div>
+            @if(model is not null){
+                    if(model.RackLayers is not null && model.RackLayers.Count> 0){
+                        
+                        @foreach(var rl in model.RackLayers)
+                        {
+                            <div>
+                                <MudTextField Label="Layer" Disabled="@(rl.LayerSide == "Top")" @bind-Value="rl.LayerSide" For="@(() => rl.LayerSide)" />
+                            </div>
+                        }
+                    }
+                }
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="mt-3">
+                    Save
+                </MudButton> 
+             </EditForm>
+             
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Href="/Racks/List" Variant="Variant.Text" Color="Color.Primary">Back to list</MudButton>
+        </MudCardActions>
+
+
+    </MudCard>
+    <div> @JsonSerializer.Serialize(model)</div>
+</div>
+
+@code {
+    private Rack model = new();
+    private bool isError { get; set; } = false;
+    private string errorMessage{ get; set; } = "";
+    private RakType[] typeNames = Enum.GetValues<RakType>();
+    private async Task DoCreate(EditContext editContext)
+    {
+        errorMessage = "";
+        isError = false;
+        var response = await http.PostAsJsonAsync("/api/Racks", model);
+        if (response.IsSuccessStatusCode)
+        {
+            model = new();
+            snackBar.Clear();
+            snackBar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+            snackBar.Add("Data saved successfully", Severity.Success);
+        }
+        else
+        {
+            errorMessage = "Failed to save";
+            isError = true;
+        }
+
+    }
+    
+    protected override Task OnInitializedAsync()
+    {
+        Console.WriteLine(typeNames[0]);
+        return Task.CompletedTask;
+    }
+    private void Generate(){
+        Console.WriteLine("G");
+        model.RackLayers?.Clear();
+        if (model.IsTopOpen)
+        {
+            if (model.RackLayers is not null)
+            {
+                model.RackLayers.Add(new RackLayer { LayerSide = "Top" });
+            }
+        }
+        if(model.RakType == RakType.OneSided)
+        {
+            if(model.RackLayers is not null){
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Front" });
+            }
+        }
+        if (model.RakType == RakType.TwoSided)
+        {
+            if (model.RackLayers is not null)
+            {
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Front" });
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Back" });
+            }
+        }
+        if (model.RakType == RakType.ThreeSided)
+        {
+            if (model.RackLayers is not null)
+            {
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Front" });
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Back" });
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Left" });
+            }
+        }
+        if (model.RakType == RakType.FourSided)
+        {
+            if (model.RackLayers is not null)
+            {
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Front" });
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Back" });
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Left" });
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Right" });
+            }
+        }
+        if (model.RakType == RakType.Cornered)
+        {
+            if (model.RackLayers is not null)
+            {
+
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Left" });
+                model.RackLayers.Add(new RackLayer { LayerSide = $"Right" });
+            }
+        }
+    }
+    
+    private void Remove(RackLayer rl)
+    {
+        if(model.RackLayers is not null)
+        {
+            model.RackLayers.Remove(rl);
+
+        }
+            
+    }
+}

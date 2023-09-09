@@ -1,0 +1,176 @@
+﻿@page "/Products/Config"
+@using EPOS.BlazorClient.Client.Shared.Components;
+@inject HttpClient http
+@inject IDialogService dialogService
+<MudGrid Spacing="2">
+    <MudItem xs="12" sm="12">
+        <MudPaper Class="mud-width-full py-8" Elevation="1">
+           
+            @if (ProductMeasurements is null)
+            {
+                <svg class="loading-progress">
+                    <circle r="40%" cx="50%" cy="50%" />
+                    <circle r="40%" cx="50%" cy="50%" />
+                </svg>
+                <div class="loading-progress-text"></div>
+            }
+            else
+            {
+                <div style="padding-left:15px;padding-right:15px">
+
+                    <div class="d-flex justify-space-between">
+                        <MudText Typo="Typo.h6" Class="d-flex align-center justify-center mud-width-full">Product Measured by</MudText>
+                        <MudToolBar Elevation="1">
+
+                            <MudFab Size="Size.Medium" OnClick="@(()=>CreateItem())" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Add" />
+                        </MudToolBar>
+                    </div>
+                    
+                    <MudTable Elevation="0" Items="@ProductMeasurements" Hover="true" SortLabel="Sort By">
+                   
+                    <HeaderContent>
+                            <MudTh><MudTableSortLabel Typo="Typo.h6" SortBy="new Func<ProductMeasurement, object>(x=>x.BaseTypeName)">Measured by</MudTableSortLabel></MudTh>
+                        
+                        <MudTh DataLabel="Action">...</MudTh>
+                    </HeaderContent>
+                   
+                    <RowTemplate>
+                        <MudTd DataLabel="Category name">@context.BaseTypeName</MudTd>
+                        
+                        <MudTd DataLabel="Action">
+                                <MudIconButton OnClick="@(()=>EditItem(@context))" Icon="@Icons.Material.Filled.Edit" aria-label="Edit"></MudIconButton>
+                                <MudIconButton OnClick="@(()=>DeleteItem(@context))" Icon="@Icons.Material.Filled.Delete" aria-label="Delete"></MudIconButton>
+                        </MudTd>
+                    </RowTemplate>
+                    
+                    <PagerContent>
+                        <MudTablePager PageSizeOptions="new int[]{5, 10, 25,50, 100}" />
+                    </PagerContent>
+                    
+                </MudTable>
+                    
+                </div>
+            }
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="12">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">xs=12 sm=6</MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="12">
+        <MudPaper Class="d-flex align-center justify-center mud-width-full py-8">xs=12 sm=6</MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private List<ProductMeasurement>? ProductMeasurements { get; set; }
+    private List<SellUnit>? SellUnits { get; set; }
+    private ProductMeasurement Model { get; set; } = new();
+    private SellUnit SellUnitModel { get; set; } = new();
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await http.GetFromJsonAsync<List<ProductMeasurement>>("api/ProductMeasurements");
+        if (data is not null)
+        {
+            ProductMeasurements = data;
+        }
+        var sellUnitData = await http.GetFromJsonAsync<List<SellUnit>>("api/ProductMeasurements");
+        if (sellUnitData is not null)
+        {
+            SellUnits = sellUnitData;
+        }
+    }
+    private async Task EditItem(ProductMeasurement obj)
+    {
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Small, FullWidth = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Model", obj);
+
+        parameters.Add("ButtonText", "Save");
+        parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() { CloseButton = true };
+
+        var dialog = await dialogService.ShowAsync<BaseTypeEditDialog>("Edit item", parameters, maxWidth);
+
+        var result = await dialog.Result;
+        if ( !result.Canceled)
+        {
+            var pm = await dialog.GetReturnValueAsync<ProductMeasurement>();
+            if (pm is not null)
+            {
+                var existing = this.ProductMeasurements?.FirstOrDefault(x => x.ProductMeasurementId == pm?.ProductMeasurementId);
+                if (existing is not null)
+                {
+                    existing.BaseTypeName = pm?.BaseTypeName ?? existing.BaseTypeName;
+                }
+            }
+        }
+
+
+    }
+
+    private async Task CreateItem()
+    {
+        DialogOptions maxWidth = new DialogOptions() { MaxWidth = MaxWidth.Small, FullWidth = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Model", Model);
+
+        parameters.Add("ButtonText", "Save");
+        parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() { CloseButton = true };
+
+        var dialog = await dialogService.ShowAsync<ProductMeasurementCreateDialog>("Add item", parameters, maxWidth);
+
+        var result = await dialog.Result;
+        if (result is not null && !!result.Canceled)
+        {
+            var pm = await dialog.GetReturnValueAsync<ProductMeasurement>();
+            if(pm is not null)
+            {
+                this.ProductMeasurements?.Add(pm!);
+            }
+
+        }
+
+    }
+    public async Task DeleteItem(ProductMeasurement pm)
+    {
+        string dialogText = "";
+        var canDelete = await CanMeasurementDelete(pm.ProductMeasurementId);
+        if (!canDelete)
+        {
+            dialogText = "This item has related child. Cascading effect might delete them";
+
+        }
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete this record? This action cannot be undone.");
+        parameters.Add("ExtraText", dialogText);
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() { CloseButton = true };
+
+        var dialog = await dialogService.ShowAsync<ConfirmDialog>("Confirm", parameters, options);
+        var result = await dialog.Result;
+        if (!result.Canceled)
+        {
+            var response = await http.DeleteAsync($"api/ProductMeasurements/{pm.ProductMeasurementId}");
+            if (response.IsSuccessStatusCode)
+            {
+                var deleted = ProductMeasurements?.ToList()
+                    .FirstOrDefault(x => x.ProductMeasurementId == pm.ProductMeasurementId);
+                ProductMeasurements = ProductMeasurements?
+                         .GroupBy(s => s)
+                         .SelectMany(g => g.Key.Equals(deleted) ? g.Skip(1) : g)
+                         .ToList();
+            }
+        }
+    }
+    private async Task<bool> CanMeasurementDelete(int id)
+    {
+        var canDelete = await http.GetFromJsonAsync<bool>($"api/ProductMeasurements/CanDelete/{id}");
+        return canDelete;
+
+    }
+}

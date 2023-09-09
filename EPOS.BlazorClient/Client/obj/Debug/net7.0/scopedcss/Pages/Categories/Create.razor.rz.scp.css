@@ -1,0 +1,16 @@
+.form-container[b-bu0v2kc4fv]{
+    width:70%;
+    margin:0 auto;
+}
+.col-2-row[b-bu0v2kc4fv]{
+    display:grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 5px;
+
+}
+@media screen and (max-width: 600px) {
+    .form-container[b-bu0v2kc4fv] {
+        width: 97.5%;
+        margin: 0 auto;
+    }
+}

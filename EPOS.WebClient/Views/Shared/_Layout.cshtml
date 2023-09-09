@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link href="~/libs/materialize-css/dist/css/materialize.css" rel="stylesheet" media="screen,projection" />
+    <script src="~/libs/materialize-css/dist/js/materialize.js"></script>
+  
+    <title>@ViewBag.Title</title>
+    <style>
+        .container-main{
+            display:block;
+            margin:15px 25px;
+        }
+        .w-row
+        {
+            width:100%;
+        }
+        .w-row.flex
+        {
+            display:flex;
+            gap:10px;
+            width:100%;
+        }
+        .w-row .col-50
+        {
+            width:50%;
+            display:flex;
+        }
+        .err {
+            color:red;
+            font-size:small;
+        }
+    </style>
+    @await RenderSectionAsync("styles", false)
+</head>
+<body>
+    <nav class="blue darken-3">
+        <div class="nav-wrapper" style="display:flex;flex-direction:row;align-items:center">
+            <a href="#" data-target="slide-out" class="sidenav-trigger show-on-medium-and-up" ><i class="material-icons">menu</i></a>
+            <a href="#" class="brand-logo" style="padding-left:50px;">EPOS WebClient</a>
+            <span style="flex:1 1 auto"></span>
+            <ul id="nav-mobile" class="right show-on-medium-and-up">
+                @if (Context.User.Identity is not null)
+                {
+                    <li><span>@Context.User.Identity.Name</span></li>
+                }
+                <li><a href="sass.html">Home</a></li>
+               
+            </ul>
+        </div>
+    </nav>
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view blue darken-3 white-text" style="padding-bottom:10px">
+               
+                    <h3>Web Client </h3>
+                    <div class="subheader white-text">Menu</div>
+                    
+            </div>
+        </li>
+        <li><a asp-action="index" asp-controller="Home"><i class="material-icons">home</i>Home</a></li>
+       
+        <li><div class="divider"></div></li>
+        <li><a asp-action="index" asp-controller="Home"><i class="material-icons">point_of_sale</i>Sell</a></li>
+        <li><a class="waves-effect" asp-action="OrderReport" asp-controller="Home"><i class="material-icons">monetization_on</i> Sales</a></li>
+    </ul>
+    <div class="container-main">
+        @RenderBody()
+    </div>
+    <script src="~/libs/jquery/jquery.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('.sidenav');
+            var instances = M.Sidenav.init(elems, {});
+        });
+    </script>
+    @await RenderSectionAsync("scripts", false)
+</body>
+</html>

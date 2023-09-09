@@ -1,0 +1,74 @@
+﻿@page "/Products/List"
+@inject HttpClient http
+<MudCard>
+    <MudCardHeader>
+
+        <CardHeaderContent>
+            <MudText Typo="Typo.h6">Products</MudText>
+            <MudText Typo="Typo.body1">List of products</MudText>
+        </CardHeaderContent>
+        <CardHeaderActions>
+            <MudFab Size="Size.Medium" Href="/Products/Create" Color="Color.Secondary" StartIcon="@Icons.Material.Filled.Add" />
+        </CardHeaderActions>
+    </MudCardHeader>
+
+    <MudCardContent>
+        @if (model is not null)
+        {
+            <MudTable Items="@model" Hover="true" SortLabel="Sort By">
+                <HeaderContent>
+                    <MudTh></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ProductViewModel, object>(x=>x.ProductName)">Product Name</MudTableSortLabel></MudTh>
+                    <MudTh DataLabel="Category"><MudTableSortLabel SortBy="new Func<ProductViewModel, object>(x=>x.CategoryId)">Category Name</MudTableSortLabel></MudTh>
+                    <MudTh DataLabel="Unit Price"><MudTableSortLabel SortBy="new Func<ProductViewModel, object>(x=>x.UnitPrice)">Unit price</MudTableSortLabel></MudTh>
+                    <MudTh DataLabel="Size/Color/Weight/Quantity">Size/Color/Weight/Quantity</MudTh>
+                    <MudTh>Offer Product?</MudTh>
+                    <MudTh>Offer type</MudTh>
+                    <MudTh>Offer detail</MudTh>
+                    <MudTh DataLabel="Action">...</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="Picture"><img class="img-thumbnail rounded-circle" src="/Pictures/@context.Picture" style="width:40px;height:40px" /></MudTd>
+                    <MudTd DataLabel="Category name">@context.ProductName</MudTd>
+                    <MudTd DataLabel="Category name">@context.CategoryName</MudTd>
+                    <MudTd DataLabel="Unit price">@context.UnitPrice</MudTd>
+                    
+                    <MudTd>@context.Size_Color_Weight_Quantity</MudTd>
+                    <MudTd>@(context.IsOffering ? "Yes" : "No")</MudTd>
+                     <MudTd>@context.OfferType</MudTd>
+                        <MudTd>@context.OfferDescription</MudTd>
+                        <MudTd DataLabel="Action">
+                            <MudIconButton Href="@GetEditLink(@context)" Icon="@Icons.Material.Filled.Edit" aria-label="Edit"></MudIconButton>
+                            @*<MudIconButton @onclick="@(()=>ConfirmDelete(@context))" Icon="@Icons.Material.Filled.Delete" aria-label="Delete"></MudIconButton>*@
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager PageSizeOptions="new int[]{5, 10, 25,50, 100}" />
+                    </PagerContent>
+                </MudTable>
+        }
+        else
+        {
+            <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+        }
+
+    </MudCardContent>
+    @* <MudCardActions>
+    <MudButton Href="/Products/List" Variant="Variant.Text" Color="Color.Primary">Back to list</MudButton>
+    </MudCardActions>*@
+</MudCard>
+
+@code {
+    private List<ProductViewModel>? model;
+    protected override async Task OnInitializedAsync()
+    {
+        var data = await this.http.GetFromJsonAsync<List<ProductViewModel>>("/api/Products/VM");
+        if (data is not null)
+            this.model = data;
+    }
+    private string GetEditLink(ProductViewModel obj)
+    {
+        Console.WriteLine($"/Products/Edit/{obj.ProductId}");
+        return $"/Products/Edit/{obj.ProductId}";
+    }
+}

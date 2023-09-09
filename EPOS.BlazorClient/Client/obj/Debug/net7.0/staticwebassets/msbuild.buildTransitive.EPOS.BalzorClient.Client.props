@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\EPOS.BalzorClient.Client.props" />
+</Project>

@@ -1,0 +1,65 @@
+<div class="view-container">
+   
+    <mat-card class="table-card mat-elevation-z9">
+      <mat-card-header>
+        <mat-card-title>Inventories</mat-card-title>
+        <mat-card-subtitle>Product inventories</mat-card-subtitle>
+        <img src="../../../../assets/warehouse-svgrepo-com.svg" mat-card-avatar class="avatar" />
+        <span class="filler"></span>
+        <a mat-mini-fab [routerLink]="['/inventory-create']" [title]="'Create new inventory'"><mat-icon>add</mat-icon></a>
+      </mat-card-header>
+      <mat-card-content >
+  
+        <mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="supplierName">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Supplier Name</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.supplierName}}</mat-cell>
+              </ng-container>
+          <ng-container matColumnDef="productName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Product Name</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.productName}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="inDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.inDate|date:'yyyy-MM-dd'}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.quantity}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="inventoryCode">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Inventory Code</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.inventoryCode}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="unitPrice">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Price (p)</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.unitPrice|number: '1.2-2'}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="selfPrice">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Price (s)</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.selfPrice|number: '1.2-2'}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="onSelf">
+            <mat-header-cell *matHeaderCellDef >Selfed/sold</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.onSelf}}/{{element.sold}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="stock">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>stock</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.stock}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>Edit/Delete</mat-header-cell>
+            <mat-cell *matCellDef="let element">
+              <button mat-icon-button [routerLink]="['/inventory-edit', element.inventoryId]"><mat-icon>edit</mat-icon></button>
+              <!-- <button mat-icon-button color="warn" (click)="confirmDelete(element)"><mat-icon>delete</mat-icon></button> -->
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+          <mat-row *matRowDef="let row;columns:columns"></mat-row>
+        </mat-table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator> 
+        
+      </mat-card-content>
+    </mat-card>
+  </div>
+

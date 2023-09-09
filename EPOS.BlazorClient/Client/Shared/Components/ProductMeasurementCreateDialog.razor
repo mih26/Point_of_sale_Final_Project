@@ -1,0 +1,59 @@
+﻿@inject HttpClient http
+@inject ISnackbar snackbar
+<MudDialog>
+    <DialogContent>
+        @if (Model is null)
+        {
+            <div>Loasing...</div>
+        }
+        else
+        {
+            
+            <EditForm Model="@Model">
+                <DataAnnotationsValidator />
+                <MudTextField Label="Category name"
+                          @bind-Value="Model.BaseTypeName" For="@(() => Model.BaseTypeName)" />
+            </EditForm>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="@Color" OnClick="Submit">@ButtonText</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; } = default!;
+    [Parameter] public ProductMeasurement Model { get; set; } = new();
+
+
+    [Parameter] public string ButtonText { get; set; } = "Save";
+
+    [Parameter] public Color Color { get; set; } = Color.Primary;
+    private bool isInsertError { get; set; } = false;
+    async Task Submit()
+    {
+        var response = await this.http.PostAsJsonAsync($"api/ProductMeasurements", Model);
+        if (response.IsSuccessStatusCode)
+        {
+            var pm = await response.Content.ReadFromJsonAsync<ProductMeasurement>();
+            if (pm is not null)
+            {
+                snackbar.Clear();
+                snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+                snackbar.Add("Data saved successfully", Severity.Success);
+                MudDialog.Close<ProductMeasurement>(pm);
+            }
+            else
+            {
+                snackbar.Clear();
+                snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomCenter;
+                snackbar.Add("Data saved successfully", Severity.Success);
+            }
+
+        }
+
+    }
+    void Cancel() => MudDialog.Cancel();
+
+}

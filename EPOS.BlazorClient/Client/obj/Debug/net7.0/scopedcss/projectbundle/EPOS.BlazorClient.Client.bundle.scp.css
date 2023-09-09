@@ -1,0 +1,99 @@
+/* /Pages/Categories/Create.razor.rz.scp.css */
+.form-container[b-bu0v2kc4fv]{
+    width:70%;
+    margin:0 auto;
+}
+.col-2-row[b-bu0v2kc4fv]{
+    display:grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 5px;
+
+}
+@media screen and (max-width: 600px) {
+    .form-container[b-bu0v2kc4fv] {
+        width: 97.5%;
+        margin: 0 auto;
+    }
+}
+/* /Pages/Categories/Edit.razor.rz.scp.css */
+.edit-form-container[b-zb3lrw8mxb] {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.col-3-row[b-zb3lrw8mxb] {
+    display: grid;
+    grid-template-columns: 1fr 1fr 100px;
+    grid-column-gap: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .edit-form-container[b-zb3lrw8mxb] {
+        width: 97.5%;
+        margin: 0 auto;
+    }
+}
+/* /Pages/Products/Create.razor.rz.scp.css */
+.form-container[b-j7ntcsk9l6] {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.col-2-row[b-j7ntcsk9l6] {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .form-container[b-j7ntcsk9l6] {
+        width: 97.5%;
+        margin: 0 auto;
+    }
+}
+/* /Pages/Products/Edit.razor.rz.scp.css */
+.form-container[b-4y6zd8ekdd] {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.col-2-row[b-4y6zd8ekdd] {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-column-gap: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .form-container[b-4y6zd8ekdd] {
+        width: 97.5%;
+        margin: 0 auto;
+    }
+}
+/* /Pages/Racks/Create.razor.rz.scp.css */
+.card-div[b-8g992gqpn2] {
+    display:block;
+    width:60%;
+    margin:0 auto;
+}
+.show[b-8g992gqpn2] {
+    display:block;
+}
+.hide[b-8g992gqpn2] {
+    display:none;
+}
+@media screen and (max-width: 600px)
+{
+    .card-div[b-8g992gqpn2] {
+        display: block;
+        width: 97%;
+        margin: 0 auto;
+    }
+}
+/* /Shared/Components/BaseTypeEditDialog.razor.rz.scp.css */
+body[b-lo4nccayvw] {
+}
+/* /Shared/MainLayout.razor.rz.scp.css */
+#app[b-osecbuajib] {
+    padding:0;
+    margin:0;
+}
